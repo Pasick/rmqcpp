@@ -348,6 +348,15 @@ bsl::shared_ptr<Connection> AsioResolver::asyncSecureConnect(
     bsl::shared_ptr<AsioSecureSocketWrapper> socket =
         bsl::make_shared<AsioSecureSocketWrapper>(d_resolver.get_executor(),
                                                   secureContext);
+    
+    // Set the Server Name Indication (SNI)
+    if (!SSL_set_tlsext_host_name(socket->socket().native_handle(), host.c_str())) {
+        unsigned long err_code = ERR_get_error();
+        char err_msg[256];
+        ERR_error_string_n(err_code, err_msg, sizeof(err_msg));
+        BALL_LOG_ERROR << "Error setting SNI hostname: [" << err_msg << "]";
+    }
+
     bslma::ManagedPtr<rmqio::Decoder> decoder =
         bslma::ManagedPtrUtil::makeManaged<Decoder>(maxFrameSize);
     connection = bsl::make_shared<AsioConnection<AsioSecureSocketWrapper> >(
