@@ -30,6 +30,8 @@
 #include <bsl_set.h>
 #include <bsls_timeinterval.h>
 
+#include <rmqa_connectionmonitor.h>
+
 namespace BloombergLP {
 namespace rmqa {
 
@@ -81,6 +83,10 @@ class RabbitContextOptions {
     /// \param successCallback function will be called when channel or
     /// connection is restored
     RabbitContextOptions& setSuccessCallback(const rmqt::SuccessCallback& successCallback);
+
+    /// \param hungMessageCallback function will be called when a connection monitor
+    /// detects hung messages
+    RabbitContextOptions& setHungMessageCallback(const rmqa::ConnectionMonitor::HungMessageCallback& callback);
 
     /// \param name name of client property to set
     /// \param value value of client property
@@ -149,6 +155,8 @@ class RabbitContextOptions {
     const rmqt::ErrorCallback& errorCallback() const { return d_onError; }
 
     const rmqt::SuccessCallback& successCallback() const { return d_onSuccess; }
+
+    rmqa::ConnectionMonitor::HungMessageCallback d_onHungMessage;
 
     const rmqt::FieldTable& clientProperties() const
     {

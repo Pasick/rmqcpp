@@ -92,6 +92,13 @@ RabbitContextOptions::setSuccessCallback(const rmqt::SuccessCallback& successCal
     return *this;
 }
 
+RabbitContextOptions&
+RabbitContextOptions::setHungMessageCallback(const rmqa::ConnectionMonitor::HungMessageCallback& hungMessageCallback)
+{
+    d_onHungMessage = hungMessageCallback;
+    return *this;
+}
+
 RabbitContextOptions& RabbitContextOptions::setMetricPublisher(
     const bsl::shared_ptr<rmqp::MetricPublisher>& metricPublisher)
 {
