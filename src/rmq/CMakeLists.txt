@@ -28,7 +28,7 @@ target_include_directories(rmq PUBLIC $<INSTALL_INTERFACE:include> $<BUILD_INTER
 target_include_directories(rmq PUBLIC $<INSTALL_INTERFACE:include> $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/rmqa>)
 
 
-file(GLOB RMQ_PUBLIC_HEADERS rmqa/*h rmqp/*h rmqt/*h)
+file(GLOB RMQ_PUBLIC_HEADERS rmqa/*h rmqp/*h rmqt/*h rmqamqpt/*h rmqamqp/*h rmqio/*h)
 set_target_properties(rmq PROPERTIES PUBLIC_HEADER "${RMQ_PUBLIC_HEADERS}")
 
 install(

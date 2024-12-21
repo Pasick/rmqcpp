@@ -166,7 +166,8 @@ RabbitContextImpl::RabbitContextImpl(
                                  bsl::ref(d_threadPool),
                                  options.successCallback()))
 , d_connectionMonitor(
-      bsl::make_shared<ConnectionMonitor>(options.messageProcessingTimeout()))
+      bsl::make_shared<ConnectionMonitor>(options.messageProcessingTimeout(),
+        options.hungMessageCallback()))
 , d_connectionFactory()
 , d_tunables(options.tunables())
 , d_consumerTracing(options.consumerTracing())

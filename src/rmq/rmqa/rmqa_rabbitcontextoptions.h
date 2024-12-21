@@ -156,7 +156,7 @@ class RabbitContextOptions {
 
     const rmqt::SuccessCallback& successCallback() const { return d_onSuccess; }
 
-    rmqa::ConnectionMonitor::HungMessageCallback d_onHungMessage;
+    const rmqa::ConnectionMonitor::HungMessageCallback& hungMessageCallback() const { return d_onHungMessage; }
 
     const rmqt::FieldTable& clientProperties() const
     {
@@ -199,6 +199,7 @@ class RabbitContextOptions {
     bdlmt::ThreadPool* d_threadpool;
     rmqt::ErrorCallback d_onError;
     rmqt::SuccessCallback d_onSuccess;
+    rmqa::ConnectionMonitor::HungMessageCallback d_onHungMessage;
     bsl::shared_ptr<rmqp::MetricPublisher> d_metricPublisher;
     rmqt::FieldTable d_clientProperties;
     bsls::TimeInterval d_messageProcessingTimeout;
